@@ -29,5 +29,12 @@
     <version>2.9.3</version>
 </dependency>
 
+<!-- http://mvnrepository.com/artifact/org.mozilla/rhino -->
+<dependency>
+    <groupId>org.mozilla</groupId>
+    <artifactId>rhino</artifactId>
+    <version>1.7.7.1</version>
+</dependency>
+
   </dependencies>
 </project>

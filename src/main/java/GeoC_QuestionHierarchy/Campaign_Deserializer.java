@@ -15,6 +15,13 @@ import com.google.gson.JsonParseException;
 public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 
 	public Campaign deserialize(JsonElement arg0, Type arg1, JsonDeserializationContext arg2) throws JsonParseException {
+		
+		String FreeTextSingle = "FreeTextSingle";
+        String FreeTextMulti = "FreeTextMulti";
+        String MultipleChoiceSingle = "MultipleChoiceSingle";
+        String MultipleChoiceMulti = "MultipleChoiceMulti";
+        String ContRange = "ContRange";
+        
 		String CamID;
 		String CamDescription;
 		String startQuestion;
@@ -25,6 +32,11 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		gsonBuilder.registerTypeAdapter(Branch.class, new Branch_Deserializer());
 		gsonBuilder.registerTypeAdapter(Workflow_Element.class, new Workflow_Element_Deserializer());
 		gsonBuilder.registerTypeAdapter(Base_Question.class, new BaseQuestion_Deserializer());
+		gsonBuilder.registerTypeAdapter(FreeTextSingle.class, new FreeTextSingle_Deserializer());
+		gsonBuilder.registerTypeAdapter(FreeTextMulti.class, new FreeTextMulti_Deserializer());
+		gsonBuilder.registerTypeAdapter(MultipleChoiceSingle.class, new MultipleChoiceSingle_Deserializer());
+		gsonBuilder.registerTypeAdapter(MultipleChoiceMulti.class, new MultipleChoiceMulti_Deserializer());
+		gsonBuilder.registerTypeAdapter(ContRange.class, new ContRange_Deserializer());
 		Gson gson = gsonBuilder.create();
 		
 		JsonObject obj = arg0.getAsJsonObject();
@@ -36,7 +48,22 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		
 		for (int i=0;i<ques_array.size();i++)
 		{
-			Question_Array.add( gson.fromJson(ques_array.get(i), Base_Question.class) );
+			Base_Question base_question = gson.fromJson(ques_array.get(i), Base_Question.class);
+			
+			if (base_question.getQuestionType().equals(FreeTextSingle))
+				Question_Array.add( gson.fromJson(ques_array.get(i), FreeTextSingle.class) );
+			
+			else if (base_question.getQuestionType().equals(FreeTextMulti))
+				Question_Array.add( gson.fromJson(ques_array.get(i), FreeTextMulti.class) );
+			
+			else if (base_question.getQuestionType().equals(MultipleChoiceSingle))
+				Question_Array.add( gson.fromJson(ques_array.get(i), MultipleChoiceSingle.class) );
+			
+			else if (base_question.getQuestionType().equals(MultipleChoiceMulti))
+				Question_Array.add( gson.fromJson(ques_array.get(i), MultipleChoiceMulti.class));
+			else if (base_question.getQuestionType().equals(ContRange))
+				Question_Array.add( gson.fromJson(ques_array.get(i), ContRange.class));
+			
 		}
 		
 		for (int i=0;i<workflow_array.size();i++)

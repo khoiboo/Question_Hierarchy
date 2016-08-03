@@ -8,7 +8,7 @@ public class Campaign {
 	String Campaign_ID;
     String Campaign_Description;
     String startQuestion;
-    List <Base_Question> Question_Array = new ArrayList<Base_Question>();
+    List Question_Array = new ArrayList();
     List<Workflow_Element> workflow = new ArrayList<Workflow_Element>();
 
     public Campaign(String ID, String description, String start, List quesArray, List workflow)

@@ -2,6 +2,7 @@ package GeoC_QuestionHierarchy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.joda.time.DateTime;
 
@@ -23,12 +24,16 @@ public class App
 		FreeTextSingle free_single2 = new FreeTextSingle("Q003",new String[]{"Text of Q003","https://theaviationist.com/wp-content/uploads/2015/03/Su-30-Vitaly-V.-Kuzmin.jpg",null});
 		FreeTextMulti free_multi = new FreeTextMulti("Q002",new String[]{"Text of Q002","http://www.airforce-technology.com/projects/su27/images/su27_2.jpg",null}, new String[]{"sub1","sub2","sub3"});
 		MultipleChoiceSingle multi_single = new MultipleChoiceSingle("Q004",new String[]{"Text of Q004","http://www.janes.com/images/assets/813/57813/main__p1487765.jpg",null}, new String[]{"yes","no"});
+		MultipleChoiceMulti multi_multi = new MultipleChoiceMulti("Q005",new String[]{"Where have you been?",null,null}, new String[]{"Valencia","Castellon","Barcelona"}   );
+		ContRange cont_range = new ContRange("Q006", new String[]{"Select a number",null,null}, new String[]{"100","250"});
 		
-		ArrayList list = new ArrayList();		
+		List list = new ArrayList();		
 		list.add(free_single);
 		list.add(free_single2);
 		list.add(free_multi);
 		list.add(multi_single);
+		list.add(multi_multi);
+		list.add(cont_range);
 		
 		
 		
@@ -67,10 +72,20 @@ public class App
 		String text = gson.toJson(cam);		
 		System.out.println(text);
 		
-		Campaign cam2 = gson.fromJson(text, Campaign.class);	
+		Campaign cam2 = gson.fromJson(text, Campaign.class);
+		List<Base_Question> question_list =  cam2.getQuestionArray();
+		System.out.println(list.size());
+		
+		Base_Question question = question_list.get(5);
+		
+		if (question instanceof ContRange)
+		{
+			System.out.println("This is a ContRange question");
+		}
 		
 		
-		System.out.println(  ((Branch) ((Workflow_Element) cam2.getWorkflow().get(3)).getCondition().get(0)).getExpression()     );
+		
+		//System.out.println(  ((Branch) ((Workflow_Element) cam2.getWorkflow().get(3)).getCondition().get(0)).getExpression()     );
 		
 		
 		//show("Q001",cam);					
