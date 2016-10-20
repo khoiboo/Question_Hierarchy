@@ -21,9 +21,17 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
         String MultipleChoiceSingle = "MultipleChoiceSingle";
         String MultipleChoiceMulti = "MultipleChoiceMulti";
         String ContRange = "ContRange";
+        String AudioSensor = "AudioSensor";
         
 		String CamID;
 		String CamDescription;
+		boolean expiryValue;
+		String startDateValue;
+		String endDateValue;
+		
+		boolean geoBooleanValue;
+		ArrayList PoI_list = new ArrayList();
+		
 		String startQuestion;
 		ArrayList Question_Array = new ArrayList();
 		ArrayList workflow = new ArrayList();
@@ -37,14 +45,23 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		gsonBuilder.registerTypeAdapter(MultipleChoiceSingle.class, new MultipleChoiceSingle_Deserializer());
 		gsonBuilder.registerTypeAdapter(MultipleChoiceMulti.class, new MultipleChoiceMulti_Deserializer());
 		gsonBuilder.registerTypeAdapter(ContRange.class, new ContRange_Deserializer());
+		gsonBuilder.registerTypeAdapter(AudioSensor.class, new AudioSensor_Deserializer());
+		gsonBuilder.registerTypeAdapter(PoI.class, new PoI_Deserializer());
 		Gson gson = gsonBuilder.create();
 		
 		JsonObject obj = arg0.getAsJsonObject();
 		CamID = obj.get("Campaign_ID").getAsString();
 		CamDescription = obj.get("Campaign_Description").getAsString();
+		expiryValue = obj.get("expiry").getAsBoolean();
+		startDateValue = obj.get("startDate").getAsString();
+		endDateValue = obj.get("endDate").getAsString();	
+		
+		geoBooleanValue = obj.get("geoBoolean").getAsBoolean();
+		
 		startQuestion = obj.get("startQuestion").getAsString(); 
 		JsonArray ques_array = obj.get("Question_Array").getAsJsonArray();
 		JsonArray workflow_array = obj.get("workflow").getAsJsonArray();
+		JsonArray PoI_Json_Array = obj.get("PoI_list").getAsJsonArray();
 		
 		for (int i=0;i<ques_array.size();i++)
 		{
@@ -61,8 +78,12 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 			
 			else if (base_question.getQuestionType().equals(MultipleChoiceMulti))
 				Question_Array.add( gson.fromJson(ques_array.get(i), MultipleChoiceMulti.class));
+			
 			else if (base_question.getQuestionType().equals(ContRange))
 				Question_Array.add( gson.fromJson(ques_array.get(i), ContRange.class));
+			
+			else if (base_question.getQuestionType().equals(AudioSensor))
+				Question_Array.add( gson.fromJson(ques_array.get(i), AudioSensor.class));
 			
 		}
 		
@@ -71,7 +92,12 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 			workflow.add( gson.fromJson(workflow_array.get(i), Workflow_Element.class) );
 		}
 		
-		Campaign campaign = new Campaign(CamID,CamDescription,startQuestion,Question_Array,workflow);		
+		for (int i=0;i<PoI_Json_Array.size();i++)
+		{
+			PoI_list.add(gson.fromJson(PoI_Json_Array.get(i), PoI.class));			
+		}
+		
+		Campaign campaign = new Campaign(CamID,CamDescription,expiryValue,startDateValue,endDateValue,geoBooleanValue,PoI_list,startQuestion,Question_Array,workflow);		
 		
 		return campaign;
 	}

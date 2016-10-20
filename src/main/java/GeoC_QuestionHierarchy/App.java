@@ -59,7 +59,7 @@ public class App
 		workflow.add(elementQ004);
 		
 		
-		Campaign cam = new Campaign("Cam999","description blabla","Q004",list, workflow);
+		Campaign cam = new Campaign("Cam999","description blabla",false,"","",false,null,"Q004",list, workflow);
     	
 		//Campaign campaign = new Campaign("Cam999","description blabla","Q001",list, workflow);
 		
