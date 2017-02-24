@@ -7,20 +7,22 @@ import java.util.List;
 public class Campaign {
 	String Campaign_ID;
     String Campaign_Description;
+    boolean onetime;
     boolean expiry;
     String startDate;
     String endDate;
     boolean geoBoolean;
-    ArrayList<PoI> PoI_list = new ArrayList<PoI>();
+    ArrayList<String> PoI_list = new ArrayList<String>();
     String startQuestion;
     List Question_Array = new ArrayList();
     List<Workflow_Element> workflow = new ArrayList<Workflow_Element>();
 
-    public Campaign(String ID, String description, boolean expiryValue, String startDateValue, String endDateValue, 
+    public Campaign(String ID, String description, boolean oneTimeInput, boolean expiryValue, String startDateValue, String endDateValue, 
     		boolean geoBoolean_input, ArrayList PoI_list_input,String start, List quesArray, List workflow)
     {
         this.Campaign_ID = ID;
         this.Campaign_Description = description;
+        this.onetime = oneTimeInput;
         this.expiry = expiryValue;
         this.startDate = startDateValue;
         this.endDate = endDateValue;        
@@ -33,6 +35,7 @@ public class Campaign {
     
     public String getID() {return this.Campaign_ID;}
     public String getDescription() {return this.Campaign_Description;}
+    public boolean getOnetimeValue()  {return this.onetime;}
     public boolean getExpiry() {return this.expiry;}
     public String getStartDate() {return this.startDate;}
     public String getEndDate() {return this.endDate;}
@@ -40,7 +43,7 @@ public class Campaign {
     public List getQuestionArray() {return this.Question_Array;}
     public List getWorkflow() {return this.workflow;}
     public boolean getgeoBoolean() {return this.geoBoolean;}
-    public ArrayList<PoI> getPoI_list() {return this.PoI_list;}
+    public ArrayList<String> getPoI_list() {return this.PoI_list;}
     
     public Base_Question getQuestionByID(String ID){
     	Base_Question result = null;

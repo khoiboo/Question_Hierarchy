@@ -12,17 +12,19 @@ public class Answer implements AnswerInterface{
 	private List<Object> list = new ArrayList<Object>();
 	private String questionID;
 	private DateTime dt;
-	private String CampaignID;
+	private String questionType;
+	private String campaignID;
 	
 	public Answer(String ID ){
 		this.questionID = ID;
 	}
 	
-	public Answer(String campaign, String ID, List list, DateTime datetime) {
-		this.CampaignID = campaign;
+	public Answer(String CamID, String quesType, String ID, List list, DateTime datetime) {
+		this.questionType = quesType;
 		this.questionID = ID;
 		this.list = list;
 		this.dt = datetime;
+		this.campaignID = CamID;
 	}
 	
 	public void setValues(List list){
@@ -68,8 +70,12 @@ public class Answer implements AnswerInterface{
 		return this.list;
 	}
 	
+	public String getQuestionType() {
+		return this.questionType;
+	}
+	
 	public String getCampaignID() {
-		return this.CampaignID;
+		return this.campaignID;
 	}
 
 }

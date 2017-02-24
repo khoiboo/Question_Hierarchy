@@ -20,6 +20,7 @@ public class Answer_Deserializer implements JsonDeserializer<Answer>{
 		
 		String camID;
 		String quesID;
+		String quesType;
 		ArrayList list;
 		DateTime dt;
 		
@@ -29,7 +30,9 @@ public class Answer_Deserializer implements JsonDeserializer<Answer>{
         
         JsonObject obj = json.getAsJsonObject();
         quesID = obj.get("questionID").getAsString();
-        camID = obj.get("CampaignID").getAsString();
+        camID = obj.get("campaignID").getAsString();
+        quesType = obj.get("questionType").getAsString();
+        
         
         JsonArray j_array = obj.get("list").getAsJsonArray();
         list = gson.fromJson(j_array, ArrayList.class);
@@ -37,7 +40,7 @@ public class Answer_Deserializer implements JsonDeserializer<Answer>{
         String datetime_string = obj.get("dt").getAsString();
         dt = new DateTime(datetime_string);
         
-        Answer answer = new Answer(camID, quesID, list, dt);
+        Answer answer = new Answer(camID, quesType, quesID, list, dt);
 		
 		return answer;
 	}

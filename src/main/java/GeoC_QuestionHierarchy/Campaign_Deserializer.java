@@ -16,21 +16,24 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 
 	public Campaign deserialize(JsonElement arg0, Type arg1, JsonDeserializationContext arg2) throws JsonParseException {
 		
-		String FreeTextSingle = "FreeTextSingle";
-        String FreeTextMulti = "FreeTextMulti";
-        String MultipleChoiceSingle = "MultipleChoiceSingle";
-        String MultipleChoiceMulti = "MultipleChoiceMulti";
-        String ContRange = "ContRange";
-        String AudioSensor = "AudioSensor";
+		String FreeTextSingle    		= "FreeTextSingle";
+        String FreeTextMulti 			= "FreeTextMulti";
+        String MultipleChoiceSingle     = "MultipleChoiceSingle";
+        String MultipleChoiceMulti      = "MultipleChoiceMulti";
+        String ContRange 				= "ContRange";
+        String AudioSensor 				= "AudioSensor";
+        String TextDisplay 				= "TextDisplay";
+        String FreeNumericSingle 		= "FreeNumericSingle";
         
 		String CamID;
 		String CamDescription;
+		boolean onetimeBoolean;
 		boolean expiryValue;
 		String startDateValue;
 		String endDateValue;
 		
 		boolean geoBooleanValue;
-		ArrayList PoI_list = new ArrayList();
+		ArrayList PoI_list = new ArrayList<String>();
 		
 		String startQuestion;
 		ArrayList Question_Array = new ArrayList();
@@ -46,12 +49,16 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		gsonBuilder.registerTypeAdapter(MultipleChoiceMulti.class, new MultipleChoiceMulti_Deserializer());
 		gsonBuilder.registerTypeAdapter(ContRange.class, new ContRange_Deserializer());
 		gsonBuilder.registerTypeAdapter(AudioSensor.class, new AudioSensor_Deserializer());
-		gsonBuilder.registerTypeAdapter(PoI.class, new PoI_Deserializer());
+		gsonBuilder.registerTypeAdapter(TextDisplay.class, new TextDisplay_Deserializer());
+		gsonBuilder.registerTypeAdapter(FreeNumericSingle.class, new FreeNumericSingle_Deserializer());
+		
+		//gsonBuilder.registerTypeAdapter(PoI.class, new PoI_Deserializer());
 		Gson gson = gsonBuilder.create();
 		
 		JsonObject obj = arg0.getAsJsonObject();
 		CamID = obj.get("Campaign_ID").getAsString();
 		CamDescription = obj.get("Campaign_Description").getAsString();
+		onetimeBoolean = obj.get("onetime").getAsBoolean();
 		expiryValue = obj.get("expiry").getAsBoolean();
 		startDateValue = obj.get("startDate").getAsString();
 		endDateValue = obj.get("endDate").getAsString();	
@@ -85,6 +92,11 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 			else if (base_question.getQuestionType().equals(AudioSensor))
 				Question_Array.add( gson.fromJson(ques_array.get(i), AudioSensor.class));
 			
+			else if (base_question.getQuestionType().equals(TextDisplay))
+				Question_Array.add( gson.fromJson(ques_array.get(i), TextDisplay.class));
+			
+			else if (base_question.getQuestionType().equals(FreeNumericSingle))
+				Question_Array.add( gson.fromJson(ques_array.get(i), FreeNumericSingle.class));
 		}
 		
 		for (int i=0;i<workflow_array.size();i++)
@@ -94,10 +106,10 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		
 		for (int i=0;i<PoI_Json_Array.size();i++)
 		{
-			PoI_list.add(gson.fromJson(PoI_Json_Array.get(i), PoI.class));			
+			PoI_list.add(gson.fromJson(PoI_Json_Array.get(i), String.class));			
 		}
 		
-		Campaign campaign = new Campaign(CamID,CamDescription,expiryValue,startDateValue,endDateValue,geoBooleanValue,PoI_list,startQuestion,Question_Array,workflow);		
+		Campaign campaign = new Campaign(CamID,CamDescription,onetimeBoolean, expiryValue,startDateValue,endDateValue,geoBooleanValue,PoI_list,startQuestion,Question_Array,workflow);		
 		
 		return campaign;
 	}
