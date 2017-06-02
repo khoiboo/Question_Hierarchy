@@ -46,4 +46,12 @@ public class MyAnswerWrapper extends ScriptableObject implements AnswerInterface
 		return "MyWrapperAnswer";
 	}
 
+	@JSGetter
+	public int getNumber() {
+		// TODO Auto-generated method stub
+		return ans.getNumber();
+	}
+	
+	
+
 }

@@ -34,14 +34,24 @@ public class Answer implements AnswerInterface{
 	public int count() {		
 		int result = 0;
 		
-		if (this.list.get(0) instanceof String )
+		if (this.list.isEmpty())
+		{ 
+			System.out.println("       +++ This question has empty answer +++");
+			return 0; 
+		}		
+		
+		else if (this.list.get(0) instanceof String ) 
 		{
 			for (int i=0;i < this.list.size();i++)
 				if (  !((String) list.get(i)).isEmpty() && list.get(i) != null &&  !((String) list.get(i)).trim().isEmpty()  ) { result++;}
 			//System.out.println("Non-empty is " + result);
 			return result;			
 		}
-		else return this.list.size();
+		else 
+			{
+				System.out.println("This question has " + this.list.size() + " answers");
+				return this.list.size();
+			}
 	}
 	
 	public Object getValue(int index) {		
@@ -76,6 +86,17 @@ public class Answer implements AnswerInterface{
 	
 	public String getCampaignID() {
 		return this.campaignID;
+	}
+
+	public int getNumber() {
+		
+		if (this.questionType.equals("FreeNumericSingle")  || this.questionType.equals("ContRange") )
+		{
+			System.out.println("From Answer class, this question returns a numeric value");
+			return Integer.parseInt( (String) this.getList().get(0) );
+		}
+		else 
+		return 0;
 	}
 
 }

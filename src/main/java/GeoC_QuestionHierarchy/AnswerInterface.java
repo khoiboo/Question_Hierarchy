@@ -13,5 +13,7 @@ public interface AnswerInterface {
 	List<Object> getValues();
 	
 	String getID();
+	
+	int getNumber();
 
 }

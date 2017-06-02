@@ -16,9 +16,20 @@ public class Campaign {
     String startQuestion;
     List Question_Array = new ArrayList();
     List<Workflow_Element> workflow = new ArrayList<Workflow_Element>();
+    boolean extrinsicBoolean;
+    ArrayList incentiveList = new ArrayList();
+    String incentiveContact;
+    boolean showResult;
+    int authorCode;
+    
+    boolean showAuthor;
+    String firstName;
+    String linkPic;
 
     public Campaign(String ID, String description, boolean oneTimeInput, boolean expiryValue, String startDateValue, String endDateValue, 
-    		boolean geoBoolean_input, ArrayList PoI_list_input,String start, List quesArray, List workflow)
+    		boolean geoBoolean_input, ArrayList PoI_list_input,String start, List quesArray, List workflow, 
+    		boolean extrinsicBooleanValue, ArrayList list_of_incentive, String incentive_Contact, boolean showResultValue, int authorCodeValue,
+    		boolean showAuthorBoolean, String firstNameValue, String linkPicValue)
     {
         this.Campaign_ID = ID;
         this.Campaign_Description = description;
@@ -31,6 +42,18 @@ public class Campaign {
         this.startQuestion = start;
         this.Question_Array = quesArray;
         this.workflow = workflow;
+        
+        this.extrinsicBoolean = extrinsicBooleanValue;
+        this.incentiveList = list_of_incentive;
+        this.incentiveContact = incentive_Contact;
+        
+        this.showResult = showResultValue;
+        
+        this.authorCode = authorCodeValue;
+        
+        this.showAuthor = showAuthorBoolean;
+        this.firstName = firstNameValue;
+        this.linkPic = linkPicValue;        		
     }    
     
     public String getID() {return this.Campaign_ID;}
@@ -44,6 +67,18 @@ public class Campaign {
     public List getWorkflow() {return this.workflow;}
     public boolean getgeoBoolean() {return this.geoBoolean;}
     public ArrayList<String> getPoI_list() {return this.PoI_list;}
+    
+    public boolean getIncentiveBoolean() {return this.extrinsicBoolean;}
+    public ArrayList getIncentiveType() {return this.incentiveList;}
+    public String getIncentiveContact() {return this.incentiveContact;}
+    
+    public boolean getShowResultBoolean() {return this.showResult;}
+    
+    public int getAuthorCode() {return this.authorCode;}
+    
+    public boolean getShowAuthor() {return this.showAuthor;}
+    public String getAuthorFirstName() {return this.firstName;}
+    public String getAuthorLinkPic() {return this.linkPic;}
     
     public Base_Question getQuestionByID(String ID){
     	Base_Question result = null;

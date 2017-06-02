@@ -13,22 +13,36 @@ import com.google.gson.JsonParseException;
 
 public class IncentiveType_Deserializer implements JsonDeserializer<IncentiveType>{
 
-	public IncentiveType deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+	public IncentiveType deserialize(JsonElement arg0, Type arg1, JsonDeserializationContext arg2)	throws JsonParseException {
 		
-		String type;
-		ArrayList list;
+		String typeNumber;
+		ArrayList<String> incentiveParameter = new ArrayList();
+		boolean finishedBooleanValue;
+		ArrayList<String> incentiveParameter2 = new ArrayList();
 		
-		Gson gson =  new Gson();
+		Gson gson = new Gson();
 		
-		JsonObject obj = json.getAsJsonObject();
-		type = obj.get("type").getAsString();
+		JsonObject obj = arg0.getAsJsonObject();
+		typeNumber = obj.get("typeNumber").getAsString();
 		
-		JsonArray jArray = obj.get("parameter").getAsJsonArray();
-		list = gson.fromJson(jArray, ArrayList.class);
+		JsonArray jarray = obj.get("parameter").getAsJsonArray();		
+		for (int i=0;i<jarray.size();i++)
+		{
+			incentiveParameter.add( gson.fromJson(jarray.get(i), String.class) );
+		}
 		
-		IncentiveType newIncentiveType = new IncentiveType(type, list);
+		finishedBooleanValue = obj.get("finishedComputation").getAsBoolean();
 		
-		return newIncentiveType;
+		JsonArray jarray2 = obj.get("parameter2").getAsJsonArray();		
+		for (int i=0;i<jarray2.size();i++)
+		{
+			incentiveParameter2.add( gson.fromJson(jarray2.get(i), String.class) );
+		}
+		
+		
+		IncentiveType incentiveType = new IncentiveType(typeNumber, incentiveParameter, finishedBooleanValue, incentiveParameter2);
+		
+		return incentiveType;
 	}
 
 }

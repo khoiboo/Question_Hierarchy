@@ -24,6 +24,7 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
         String AudioSensor 				= "AudioSensor";
         String TextDisplay 				= "TextDisplay";
         String FreeNumericSingle 		= "FreeNumericSingle";
+        String UploadPhoto				= "UploadPhoto";
         
 		String CamID;
 		String CamDescription;
@@ -39,6 +40,18 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		ArrayList Question_Array = new ArrayList();
 		ArrayList workflow = new ArrayList();
 		
+		boolean incentiveBooleanValue;
+		ArrayList incentiveType = new ArrayList();
+		String incentiveContact;
+		
+		boolean showResultValue;
+				
+		int authorCode;
+		
+		boolean showAuthorValue;
+		String firstName;
+		String linkPic;
+		
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(Branch.class, new Branch_Deserializer());
 		gsonBuilder.registerTypeAdapter(Workflow_Element.class, new Workflow_Element_Deserializer());
@@ -51,6 +64,8 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		gsonBuilder.registerTypeAdapter(AudioSensor.class, new AudioSensor_Deserializer());
 		gsonBuilder.registerTypeAdapter(TextDisplay.class, new TextDisplay_Deserializer());
 		gsonBuilder.registerTypeAdapter(FreeNumericSingle.class, new FreeNumericSingle_Deserializer());
+		gsonBuilder.registerTypeAdapter(IncentiveType.class, new IncentiveType_Deserializer());
+		gsonBuilder.registerTypeAdapter(UploadPhoto.class, new UploadPhoto_Deserializer());
 		
 		//gsonBuilder.registerTypeAdapter(PoI.class, new PoI_Deserializer());
 		Gson gson = gsonBuilder.create();
@@ -69,6 +84,23 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		JsonArray ques_array = obj.get("Question_Array").getAsJsonArray();
 		JsonArray workflow_array = obj.get("workflow").getAsJsonArray();
 		JsonArray PoI_Json_Array = obj.get("PoI_list").getAsJsonArray();
+		
+		incentiveBooleanValue = obj.get("extrinsicBoolean").getAsBoolean();
+		incentiveContact = obj.get("incentiveContact").getAsString();
+		JsonArray incentiveListJArray = obj.get("incentiveList").getAsJsonArray();
+		
+		showResultValue = obj.get("showResult").getAsBoolean();
+		
+		authorCode = obj.get("authorCode").getAsInt();
+		
+		showAuthorValue = obj.get("showAuthor").getAsBoolean();
+		firstName = obj.get("firstName").getAsString();
+		linkPic = obj.get("linkPic").getAsString();
+		
+		for (int i=0;i<incentiveListJArray.size();i++ )
+		{
+			incentiveType.add(gson.fromJson(incentiveListJArray.get(i), IncentiveType.class));
+		}
 		
 		for (int i=0;i<ques_array.size();i++)
 		{
@@ -97,6 +129,9 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 			
 			else if (base_question.getQuestionType().equals(FreeNumericSingle))
 				Question_Array.add( gson.fromJson(ques_array.get(i), FreeNumericSingle.class));
+			
+			else if (base_question.getQuestionType().equals(UploadPhoto))
+				Question_Array.add( gson.fromJson(ques_array.get(i), UploadPhoto.class));
 		}
 		
 		for (int i=0;i<workflow_array.size();i++)
@@ -109,7 +144,8 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 			PoI_list.add(gson.fromJson(PoI_Json_Array.get(i), String.class));			
 		}
 		
-		Campaign campaign = new Campaign(CamID,CamDescription,onetimeBoolean, expiryValue,startDateValue,endDateValue,geoBooleanValue,PoI_list,startQuestion,Question_Array,workflow);		
+		Campaign campaign = new Campaign(CamID,CamDescription,onetimeBoolean, expiryValue,startDateValue,endDateValue,geoBooleanValue,PoI_list,startQuestion,Question_Array,
+										 workflow,incentiveBooleanValue,incentiveType,incentiveContact,showResultValue, authorCode, showAuthorValue, firstName, linkPic);		
 		
 		return campaign;
 	}
