@@ -25,11 +25,13 @@ public class Campaign {
     boolean showAuthor;
     String firstName;
     String linkPic;
+    
+    boolean continuousSubmission;
 
     public Campaign(String ID, String description, boolean oneTimeInput, boolean expiryValue, String startDateValue, String endDateValue, 
     		boolean geoBoolean_input, ArrayList PoI_list_input,String start, List quesArray, List workflow, 
     		boolean extrinsicBooleanValue, ArrayList list_of_incentive, String incentive_Contact, boolean showResultValue, int authorCodeValue,
-    		boolean showAuthorBoolean, String firstNameValue, String linkPicValue)
+    		boolean showAuthorBoolean, String firstNameValue, String linkPicValue, boolean continuousSubmissionValue)
     {
         this.Campaign_ID = ID;
         this.Campaign_Description = description;
@@ -53,7 +55,9 @@ public class Campaign {
         
         this.showAuthor = showAuthorBoolean;
         this.firstName = firstNameValue;
-        this.linkPic = linkPicValue;        		
+        this.linkPic = linkPicValue;    
+        
+        this.continuousSubmission = continuousSubmissionValue;
     }    
     
     public String getID() {return this.Campaign_ID;}
@@ -79,6 +83,8 @@ public class Campaign {
     public boolean getShowAuthor() {return this.showAuthor;}
     public String getAuthorFirstName() {return this.firstName;}
     public String getAuthorLinkPic() {return this.linkPic;}
+    
+    public boolean getContinuousSubmissionValue() { return this.continuousSubmission; }
     
     public Base_Question getQuestionByID(String ID){
     	Base_Question result = null;

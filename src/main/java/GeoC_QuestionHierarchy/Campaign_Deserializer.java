@@ -25,6 +25,9 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
         String TextDisplay 				= "TextDisplay";
         String FreeNumericSingle 		= "FreeNumericSingle";
         String UploadPhoto				= "UploadPhoto";
+        String DateInput				= "DateInput";
+        String TimeInput				= "TimeInput";
+        String WifiSensor				= "WifiSensor";
         
 		String CamID;
 		String CamDescription;
@@ -52,6 +55,8 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		String firstName;
 		String linkPic;
 		
+		boolean continuousSubmissionValue;
+		
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(Branch.class, new Branch_Deserializer());
 		gsonBuilder.registerTypeAdapter(Workflow_Element.class, new Workflow_Element_Deserializer());
@@ -66,6 +71,9 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		gsonBuilder.registerTypeAdapter(FreeNumericSingle.class, new FreeNumericSingle_Deserializer());
 		gsonBuilder.registerTypeAdapter(IncentiveType.class, new IncentiveType_Deserializer());
 		gsonBuilder.registerTypeAdapter(UploadPhoto.class, new UploadPhoto_Deserializer());
+		gsonBuilder.registerTypeAdapter(DateInput.class, new DateInput_Deserializer());
+		gsonBuilder.registerTypeAdapter(TimeInput.class, new TimeInput_Deserializer());
+		gsonBuilder.registerTypeAdapter(WifiSensor.class, new WifiSensor_Deserializer());
 		
 		//gsonBuilder.registerTypeAdapter(PoI.class, new PoI_Deserializer());
 		Gson gson = gsonBuilder.create();
@@ -96,6 +104,8 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		showAuthorValue = obj.get("showAuthor").getAsBoolean();
 		firstName = obj.get("firstName").getAsString();
 		linkPic = obj.get("linkPic").getAsString();
+		
+		continuousSubmissionValue = obj.get("continuousSubmission").getAsBoolean();
 		
 		for (int i=0;i<incentiveListJArray.size();i++ )
 		{
@@ -132,6 +142,15 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 			
 			else if (base_question.getQuestionType().equals(UploadPhoto))
 				Question_Array.add( gson.fromJson(ques_array.get(i), UploadPhoto.class));
+			
+			else if (base_question.getQuestionType().equals(DateInput))
+				Question_Array.add( gson.fromJson(ques_array.get(i), DateInput.class));
+			
+			else if (base_question.getQuestionType().equals(TimeInput))
+				Question_Array.add( gson.fromJson(ques_array.get(i), TimeInput.class));
+			
+			else if (base_question.getQuestionType().equals(WifiSensor))
+				Question_Array.add( gson.fromJson(ques_array.get(i), WifiSensor.class));
 		}
 		
 		for (int i=0;i<workflow_array.size();i++)
@@ -145,7 +164,7 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		}
 		
 		Campaign campaign = new Campaign(CamID,CamDescription,onetimeBoolean, expiryValue,startDateValue,endDateValue,geoBooleanValue,PoI_list,startQuestion,Question_Array,
-										 workflow,incentiveBooleanValue,incentiveType,incentiveContact,showResultValue, authorCode, showAuthorValue, firstName, linkPic);		
+										 workflow,incentiveBooleanValue,incentiveType,incentiveContact,showResultValue, authorCode, showAuthorValue, firstName, linkPic, continuousSubmissionValue);		
 		
 		return campaign;
 	}
