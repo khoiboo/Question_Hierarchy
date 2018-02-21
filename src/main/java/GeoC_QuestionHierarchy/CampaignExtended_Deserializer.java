@@ -12,9 +12,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
+public class CampaignExtended_Deserializer implements JsonDeserializer<CampaignExtended>{
 
-	public Campaign deserialize(JsonElement arg0, Type arg1, JsonDeserializationContext arg2) throws JsonParseException {
+	public CampaignExtended deserialize(JsonElement arg0, Type arg1, JsonDeserializationContext arg2) throws JsonParseException {
 		
 		String FreeTextSingle    		= "FreeTextSingle";
         String FreeTextMulti 			= "FreeTextMulti";
@@ -28,7 +28,6 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
         String DateInput				= "DateInput";
         String TimeInput				= "TimeInput";
         String WifiSensor				= "WifiSensor";
-        String GPSSensor				= "GPSSensor";
         
 		String CamID;
 		String CamDescription;
@@ -49,7 +48,9 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		String incentiveContact;
 		
 		boolean showResultValue;
-				
+		
+		int secretCode;
+		
 		int authorCode;
 		
 		boolean showAuthorValue;
@@ -57,6 +58,10 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		String linkPic;
 		
 		boolean continuousSubmissionValue;
+		boolean trackedSubmissionValue;
+		
+		boolean userProfileBoolean;
+		UserProfile userProfile;
 		
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(Branch.class, new Branch_Deserializer());
@@ -75,6 +80,9 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		gsonBuilder.registerTypeAdapter(DateInput.class, new DateInput_Deserializer());
 		gsonBuilder.registerTypeAdapter(TimeInput.class, new TimeInput_Deserializer());
 		gsonBuilder.registerTypeAdapter(WifiSensor.class, new WifiSensor_Deserializer());
+		gsonBuilder.registerTypeAdapter(UserProfile.class, new UserProfile_Deserializer());
+		gsonBuilder.registerTypeAdapter(ExperienceType.class, new ExperienceType_Deserializer());
+		
 		
 		//gsonBuilder.registerTypeAdapter(PoI.class, new PoI_Deserializer());
 		Gson gson = gsonBuilder.create();
@@ -100,6 +108,8 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		
 		showResultValue = obj.get("showResult").getAsBoolean();
 		
+		secretCode = obj.get("secretCode").getAsInt();
+		
 		authorCode = obj.get("authorCode").getAsInt();
 		
 		showAuthorValue = obj.get("showAuthor").getAsBoolean();
@@ -107,6 +117,13 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 		linkPic = obj.get("linkPic").getAsString();
 		
 		continuousSubmissionValue = obj.get("continuousSubmission").getAsBoolean();
+		trackedSubmissionValue = obj.get("followUp").getAsBoolean();
+		
+		userProfileBoolean = obj.get("userProfileBoolean").getAsBoolean();
+		
+		JsonObject jObj_UserProfile = obj.get("userProfileValue").getAsJsonObject();
+		userProfile = gson.fromJson(jObj_UserProfile, UserProfile.class);
+		
 		
 		for (int i=0;i<incentiveListJArray.size();i++ )
 		{
@@ -152,8 +169,6 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 			
 			else if (base_question.getQuestionType().equals(WifiSensor))
 				Question_Array.add( gson.fromJson(ques_array.get(i), WifiSensor.class));
-			else if (base_question.getQuestionType().equals(GPSSensor))
-				Question_Array.add( gson.fromJson(ques_array.get(i), GPSSensor.class));
 		}
 		
 		for (int i=0;i<workflow_array.size();i++)
@@ -166,8 +181,9 @@ public class Campaign_Deserializer implements JsonDeserializer<Campaign>{
 			PoI_list.add(gson.fromJson(PoI_Json_Array.get(i), String.class));			
 		}
 		
-		Campaign campaign = new Campaign(CamID,CamDescription,onetimeBoolean, expiryValue,startDateValue,endDateValue,geoBooleanValue,PoI_list,startQuestion,Question_Array,
-										 workflow,incentiveBooleanValue,incentiveType,incentiveContact,showResultValue, authorCode, showAuthorValue, firstName, linkPic, continuousSubmissionValue);		
+		CampaignExtended campaign = new CampaignExtended(CamID,CamDescription,onetimeBoolean, expiryValue,startDateValue,endDateValue,geoBooleanValue,PoI_list,startQuestion,Question_Array,
+										 workflow,incentiveBooleanValue,incentiveType,incentiveContact,showResultValue, secretCode, authorCode,
+										 showAuthorValue, firstName, linkPic, continuousSubmissionValue, trackedSubmissionValue,userProfileBoolean,userProfile);		
 		
 		return campaign;
 	}

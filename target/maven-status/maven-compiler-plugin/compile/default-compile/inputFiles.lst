@@ -1,3 +1,4 @@
+C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\CampaignExtended_Deserializer.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\DateInput.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\FreeTextSingle.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\MultipleChoiceMulti_Deserializer.java
@@ -10,6 +11,7 @@ C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\Branch_Deserializer.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\Submission.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\Base_Question.java
+C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\GPSSensor_Deserializer.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\DateWrapFactory.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\WifiSensor_Deserializer.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\Branch.java
@@ -23,8 +25,11 @@ C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\FreeTextMulti_Deserializer.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\Workflow_Element.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\UploadPhoto_Deserializer.java
+C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\ExperienceType_Deserializer.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\FreeNumericSingle.java
+C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\UserProfile_Deserializer.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\DateTimeConverter.java
+C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\FakeCampaign_Deserializer.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\UserRegistration.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\App.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\IncentiveType_Deserializer.java
@@ -38,8 +43,10 @@ C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\TextDisplay.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\WifiNetwork.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\AudioSensor.java
+C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\FakeCampaign.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\TimeInput.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\TimeInput_Deserializer.java
+C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\GPSSensor.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\Shape.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\Rank_Deserializer.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\DateInput_Deserializer.java
@@ -48,6 +55,9 @@ C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\AnswerInterface.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\FreeTextMulti.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\MultipleChoiceMulti.java
+C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\ExperienceType.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\IncentiveType.java
+C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\UserProfile.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\AreaOfInterest_Deserializer.java
+C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\CampaignExtended.java
 C:\Users\Khoi\Hierarchy2\Question_Hierarchy\src\main\java\GeoC_QuestionHierarchy\Campaign_Deserializer.java
